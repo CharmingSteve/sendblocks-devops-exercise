@@ -58,7 +58,7 @@ resource "kubernetes_pod" "backend" {
   }
   spec {
     container {
-      image = "charmingsteve/tempabackend:latest"
+      image = "charmingsteve/tempbackend:latest"
       name  = "backend"
       
       env {
