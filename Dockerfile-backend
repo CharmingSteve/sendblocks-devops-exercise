@@ -1,0 +1,22 @@
+# Pull official base image
+FROM node:16.14.0
+
+# Set working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the backend directory contents into the container
+COPY ./backend ./backend
+
+# Change into the backend directory
+WORKDIR /usr/src/app/backend
+
+# Install application dependencies
+RUN npm install
+
+# Your app listens on port 3000 so you'll use the EXPOSE instruction to have it mapped by the Docker daemon
+EXPOSE 8000
+
+# Define the command to run your app using CMD which defines your runtime
+# Here we use "npm start" according to the requirements
+CMD [ "npm", "start" ]
+
