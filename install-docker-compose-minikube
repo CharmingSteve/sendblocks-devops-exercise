@@ -16,3 +16,8 @@
    25  kubectl get pods -A
    26  minikube start --driver=kvm2
    27  minikube start
+   70  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+   71  source ~/.bashrc
+   72  nvm --version
+   73  nvm install 16.14.0
+   74  nvm alias default 16.14.0
