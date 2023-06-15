@@ -1,0 +1,23 @@
+# Pull official base image
+FROM node:16.14.0
+
+# Set working directory in the container
+WORKDIR /usr/src/app
+
+# Clone the repository
+RUN git clone https://github.com/CharmingSteve/sendblocks-devops-exercise.git
+
+# Change into the frontend directory of the cloned repo
+WORKDIR /usr/src/app/sendblocks-devops-exercise/frontend
+
+# Install chokidar and application dependencies
+RUN npm install chokidar && npm install
+
+# Your app listens on port 3000 so you'll use the EXPOSE instruction to have it mapped by the Docker daemon
+# Change the port if your frontend application is running on a different port
+EXPOSE 3000
+
+# Define the command to run your app using CMD which defines your runtime
+# Here we use "npm start" according to the requirements
+CMD [ "npm", "start" ]
+
