@@ -33,6 +33,22 @@ resource "kubernetes_pod" "db" {
   }
 }
 
+resource "kubernetes_service" "db" {
+  metadata {
+    name = "db-service"
+  }
+  spec {
+    selector = {
+      app = "db"
+    }
+    port {
+      port        = 5432
+      target_port = 5432
+    }
+    type = "ClusterIP"
+  }
+}
+
 resource "kubernetes_service" "backend" {
   metadata {
     name = "backend-service"
@@ -45,7 +61,7 @@ resource "kubernetes_service" "backend" {
       port        = 8000
       target_port = 8000
     }
-    type = "ClusterIP"
+    type = "LoadBalancer"
   }
 }
 
@@ -67,7 +83,7 @@ resource "kubernetes_pod" "backend" {
       }
       env {
         name = "DB_HOST"
-        value = "db"
+        value = "db-service"
       }
       env {
         name = "DB_USER"
@@ -117,4 +133,3 @@ resource "kubernetes_pod" "frontend" {
     }
   }
 }
-
