@@ -4,11 +4,11 @@ FROM node:16.14.0
 # Set working directory in the container
 WORKDIR /usr/src/app
 
-# Copy the backend directory contents into the container
-COPY ./backend ./backend
+# Clone the repository
+RUN git clone https://github.com/CharmingSteve/sendblocks-devops-exercise.git
 
-# Change into the backend directory
-WORKDIR /usr/src/app/backend
+# Change into the backend directory of the cloned repo
+WORKDIR /usr/src/app/sendblocks-devops-exercise/backend
 
 # Install application dependencies
 RUN npm install
